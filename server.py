@@ -6,7 +6,6 @@ import sqlite3
 
 PORT = 8000
 
-# ✅ Persistent AVL state (lives as long as server runs)
 tree_values = []
 
 connection = sqlite3.connect("visualizer/visualizer.db", check_same_thread=False)
