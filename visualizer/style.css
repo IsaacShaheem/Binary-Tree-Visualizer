@@ -1,0 +1,70 @@
+body{
+    font-family: "Inter",system-ui, -apple-system, sans-serif;
+    background: #f6f8fb;
+    margin: 0;
+    padding: 0;
+    color:#222;
+}
+
+h1{
+    text-align: center;
+    margin: 20px, 0;
+    font-weight: 600;
+}
+
+#controls{
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+input[type="number"]{
+    padding: 8px 10px;
+    width: 160px;
+    font-size: 15px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+}
+
+button{
+    padding: 8px 14px;
+    font-size: 14px;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    background: #4f7cff;
+    color: white;
+    transition: background 0.2s ease;
+}
+
+button:hover{
+    background: #3a66e0;
+}
+
+button:disabled{
+    background: #bbb;
+    cursor: not-allowed;
+}
+
+#canvas{
+    display: block;
+    margin: 0 auto;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.68);
+}
+
+#navigation{
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin: 15px 0;
+}
+
+.footer{
+    text-align: center;
+    font-size: 13px;
+    color: #666;
+    margin-top: 10px;
+}

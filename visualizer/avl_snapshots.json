@@ -1,0 +1,6 @@
+[
+{"key": 60,"left": null,"right": null,"height": 0,"balance": 0},
+{"key": 60,"left": null,"right": {"key": 67,"left": null,"right": null,"height": 0,"balance": 0},"height": 1,"balance": 0},
+{"key": 67,"left": {"key": 60,"left": null,"right": null,"height": 0,"balance": 0},"right": {"key": 69,"left": null,"right": null,"height": 0,"balance": 0},"height": 1,"balance": 0},
+{}
+]

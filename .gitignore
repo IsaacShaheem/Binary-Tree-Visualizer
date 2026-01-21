@@ -1,0 +1,140 @@
+# AVL & BST Tree Visualizer
+
+An interactive full-stack Binary Search Tree (BST) and AVL Tree visualizer built from scratch to demonstrate how self-balancing trees work internally.
+
+The core data-structure logic is implemented in C, while the visualization and interaction layer is built using JavaScript and SVG. A Python backend coordinates execution and persists operation history using SQLite.
+
+This project was designed to deeply understand AVL rotations, balancing logic, and how low-level systems code can integrate with modern web interfaces.
+
+---
+
+## Features
+
+- Interactive node insertion from the browser
+- Visualization of BST and AVL trees
+- Step-by-step navigation using Previous / Next buttons
+- Smooth animated AVL rotations
+- Color-coded rotation transitions
+- Persistent backend tree state
+- SQL logging of operations
+- SVG-based rendering for performance and clarity
+
+---
+
+## Motivation
+
+This project was built to move beyond textbook implementations of trees and focus on how they actually behave during operations. By visualizing every structural change and rotation, the internal mechanics of AVL trees become intuitive and easy to reason about.
+
+Unlike many visualizers, the tree logic is not simulated in JavaScript. All insertions and balancing are computed in C, making this a realistic systems-level project rather than a UI-only demonstration.
+
+---
+
+## Tech Stack
+
+- C — BST and AVL tree implementation
+- Python — backend HTTP server
+- JavaScript — frontend logic and animation
+- HTML / CSS — user interface
+- SVG — tree rendering
+- SQLite — persistent operation storage
+- Makefile — build system
+
+---
+
+## Project Structure
+
+avl-tree-visualizer/
+├── bin/
+│   └── avl
+├── src/
+│   ├── avl.c
+│   ├── avl.h
+│   └── main.c
+├── visualizer/
+│   ├── index.html
+│   ├── visualize.js
+│   ├── style.css
+│   └── avl_snapshots.json
+├── server.py
+├── Makefile
+└── README.md
+
+---
+
+## How It Works
+
+1. The user inserts a value through the web interface.
+2. JavaScript sends a request to the Python backend.
+3. The Python server invokes the compiled C AVL program.
+4. The C program generates tree snapshots as JSON.
+5. JavaScript animates transitions between snapshots.
+6. Each operation is stored in SQLite for persistence.
+
+---
+
+## Running the Project
+
+Build the C code:
+
+make
+
+Start the backend server:
+
+python3 server.py
+
+Open the visualizer in your browser:
+
+http://localhost:8000
+
+---
+
+## Visualization Details
+
+- Nodes are rendered as SVG circles with labels.
+- Tree edges are drawn dynamically between nodes.
+- AVL rotations animate smoothly between states.
+- Nodes involved in rotations are temporarily highlighted.
+- Layout automatically adjusts as the tree grows.
+
+---
+
+## SQL Integration
+
+SQLite is used to log all tree operations. Each entry stores:
+- Operation type
+- Inserted value
+- Full tree snapshot (JSON)
+- Timestamp
+
+This enables future features such as undo/redo, replay, and analytics.
+
+---
+
+## Future Improvements
+
+- Delete node operation
+- Undo and redo using SQL history
+- Tree traversal animations
+- Playback controls and speed adjustment
+- Dark mode styling
+- Side-by-side BST vs AVL comparison
+
+---
+
+## Interview Talking Points
+
+- AVL rotation cases (LL, RR, LR, RL)
+- Height and balance factor maintenance
+- Recursive insertion and rebalancing
+- Parent pointer management
+- Separation of concerns across languages
+- SVG animation with requestAnimationFrame
+- SQL as an operation log and persistence layer
+
+---
+
+## Author
+
+Isaac Shaheem
+Computer Science Student
+
