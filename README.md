@@ -1,91 +1,138 @@
-# AVL & BST Tree Visualizer
+# Binary Tree Visualizer
 
-An interactive, full-stack **Binary Search Tree (BST)** and **AVL Tree** visualizer designed to help students and developers understand how tree structures evolve during insertions and rotations.
+An interactive full-stack visualizer for Binary Search Trees and AVL Trees. It was built to make tree operations, balancing behavior and AVL rotations easier to understand through real-time SVG animation.
 
-Unlike many visualizers that simulate logic in JavaScript, this project implements **all tree operations in C**, providing an accurate systems-level view of how BSTs and AVL trees work internally. Structural changes are exported as JSON snapshots and animated smoothly in the browser.
+The core data structure logic is written in C, exposed to Python through `ctypes`, served by a Flask API and rendered in the browser with vanilla JavaScript.
 
----
+## Features
 
-## 🌟 Key Features
+- Visualize Binary Search Tree and AVL Tree behavior
+- Compare BST vs AVL side by side
+- Insert and delete nodes interactively
+- Smooth SVG animations for node movement and rotations
+- Live statistics for height and node count
+- Replay operation history step by step
+- Demo mode that shows how AVL trees stay balanced
+- Responsive, minimal browser UI
 
-- Interactive node insertion via the browser
-- Visualizes both **BST** and **AVL** trees
-- Step-by-step navigation using **Previous / Next**
-- Smooth animated AVL rotations
-- Color-coded rotation transitions
-- Persistent backend tree state
-- SQL-based operation logging
-- SVG rendering for clarity and performance
+## Architecture
 
----
+```text
+C (BST/AVL logic)
+  ↓
+Python ctypes wrapper
+  ↓
+Flask API
+  ↓
+Frontend SVG visualizer
+```
 
-## 🧠 Motivation
+This architecture keeps each layer focused. C owns the tree algorithms and memory management. Python uses `ctypes` to call the compiled shared library directly, avoiding subprocess overhead and file-based communication. Flask handles request routing and JSON responses while the frontend focuses on rendering, animation and interaction.
 
-Tree data structures are often difficult to understand because their behavior is dynamic and recursive. This project was built to make those internal changes **visible and intuitive**, especially for AVL trees where rotations can be conceptually challenging.
+## Screenshots / Demo
 
-The goal was not just to “make it work,” but to:
-- Understand AVL balancing deeply
-- Implement real rotations, not visual tricks
-- Bridge low-level systems programming with modern web visualization
-- Build an interview-ready systems project
+![Demo Screenshot](images/demo.png)
 
----
+Demo GIF or video:
 
-## 🏗️ Architecture Overview
+![Demo GIF](images/demo.gif)
 
-This project is split into clearly defined layers:
+## How AVL Trees Work
 
-### 1. Core Logic (C)
-- BST and AVL tree implementations
-- Height and balance factor maintenance
-- All rotations (LL, RR, LR, RL)
-- Exports structural snapshots as JSON
+A regular BST can become unbalanced if values are inserted in sorted order. In the worst case it starts behaving like a linked list, which makes search, insert and delete slower.
 
-### 2. Backend Server (Python)
-- HTTP server using `http.server`
-- Manages persistent tree state
-- Invokes the compiled C binary
-- Stores operations and snapshots in SQLite
+An AVL tree keeps itself balanced by checking height differences after updates. When a subtree becomes too unbalanced, the tree performs rotations: LL, RR, LR or RL. Compare mode makes this visible by showing the same operations applied to both a BST and an AVL tree.
 
-### 3. Frontend (JavaScript + SVG)
-- Fetches tree snapshots from the backend
-- Computes layout positions
-- Animates transitions using `requestAnimationFrame`
-- Renders nodes and edges using SVG
+## Tech Stack
 
----
+- C
+- Python
+- ctypes
+- Flask
+- JavaScript
+- SVG
+- HTML/CSS
 
-## 🧰 Tech Stack
+## Project Structure
 
-| Layer | Technology |
-|-----|-----------|
-| Data Structures | C |
-| Backend Server | Python |
-| Frontend Logic | JavaScript |
-| Visualization | SVG |
-| Database | SQLite |
-| UI | HTML, CSS |
-| Build System | Makefile |
+```text
+c/
+  tree.c        BST and AVL implementation
+  tree.h        Public C API for the shared library
 
----
+backend/
+  c_tree.py     ctypes wrapper around the C library
+  tree_service.py
+                Tree state and operation coordination
+  app.py        Flask API and static frontend serving
 
----
+frontend/
+  index.html    App layout
+  style.css     UI styling
+  visualize.js  SVG rendering, animation, replay and demo logic
 
-## 🔄 How It Works
+tests/
+  test_tree.c   C tests for BST and AVL behavior
+  test_c_tree.py
+                ctypes integration tests
+  test_app.py   Flask API tests
+```
 
-1. User enters a value in the browser
-2. JavaScript sends an `/insert` request to the server
-3. Python server calls the C AVL program
-4. C generates updated tree snapshots (JSON)
-5. JavaScript animates transitions between snapshots
-6. SQL logs the operation and snapshot
+## Installation & Running
 
----
+Install Python dependencies:
 
-## ▶️ Running the Project
+```bash
+python3 -m pip install -r requirements.txt
+```
 
-### Build the C code
+Build the C shared library:
+
 ```bash
 make
+```
 
+Start the Flask app:
 
+```bash
+python3 -m backend.app
+```
+
+Open:
+
+```text
+http://127.0.0.1:8000
+```
+
+## Running Tests
+
+Run C tests:
+
+```bash
+make test
+```
+
+Run Python integration and API tests:
+
+```bash
+python3 -m unittest tests/test_c_tree.py tests/test_app.py
+```
+
+## Interesting Technical Details
+
+- AVL insert and delete support LL, RR, LR and RL rebalancing cases
+- C tree nodes are allocated and freed explicitly to avoid leaks
+- Python calls the compiled C shared library directly through `ctypes`
+- Flask exposes a small JSON API for insert, delete, reset and tree state
+- Compare mode synchronizes BST and AVL SVG rendering in the same animation frame
+- Replay rebuilds tree state from recorded operations with controlled timing
+
+## Future Improvements
+
+- Persistent save and load for operation histories
+- Additional structures such as Red-Black Trees or Heaps
+- More mobile layout refinement for small screens
+
+## Final Notes
+
+This project connects systems programming, data structures and full-stack development in one small application. It shows how low-level C logic can power an interactive browser experience while keeping the architecture clean and testable.

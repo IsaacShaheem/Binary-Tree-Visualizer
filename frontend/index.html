@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/style.css" />
+    <title>Binary Tree Visualizer</title>
+  </head>
+  <body>
+    <main class="app-shell">
+      <section id="home-screen" class="home-screen">
+        <p class="eyebrow">C tree engine + Flask API</p>
+        <h1>Binary Tree Visualizer</h1>
+        <div class="mode-actions" aria-label="Choose visualizer mode">
+          <button class="mode-button" data-mode="bst" type="button">Build BST</button>
+          <button class="mode-button" data-mode="avl" type="button">Build AVL</button>
+          <button class="mode-button" data-mode="compare" type="button">Compare BST vs AVL</button>
+        </div>
+      </section>
+
+      <section id="visualizer-screen" class="visualizer-screen hidden">
+        <header class="topbar">
+          <div>
+            <p id="mode-label" class="eyebrow">AVL mode</p>
+            <h1>Binary Tree Visualizer</h1>
+          </div>
+          <div class="topbar-actions">
+            <button id="change-mode" class="secondary" type="button">Back to Home</button>
+            <button id="reset" type="button">Reset</button>
+          </div>
+        </header>
+        <section class="toolbar" aria-label="Tree controls">
+          <input id="input" type="number" placeholder="Enter integer" />
+          <button id="insert" type="button">Insert</button>
+          <button id="delete" class="danger" type="button">Delete</button>
+          <button id="run-demo" class="secondary" type="button">Run Demo</button>
+          <p id="status" role="status"></p>
+        </section>
+
+        <section class="replay-controls" aria-label="Replay controls">
+          <button id="play-replay" class="secondary" type="button">Play</button>
+          <button id="pause-replay" class="secondary" type="button">Pause</button>
+          <button id="reset-replay" class="secondary" type="button">Reset Replay</button>
+        </section>
+
+        <section id="stats-panel" class="stats-panel" aria-label="Tree statistics"></section>
+
+        <section id="single-view" class="visualizer">
+          <svg id="canvas" viewBox="0 0 900 520" role="img" aria-label="Tree visualization"></svg>
+        </section>
+
+        <section id="compare-view" class="compare-view hidden">
+          <article class="tree-panel">
+            <h2>BST</h2>
+            <svg id="bst-canvas" viewBox="0 0 900 520" role="img" aria-label="BST visualization"></svg>
+          </article>
+          <article class="tree-panel">
+            <h2>AVL</h2>
+            <svg id="avl-canvas" viewBox="0 0 900 520" role="img" aria-label="AVL visualization"></svg>
+          </article>
+        </section>
+
+        <section class="timeline">
+          <h2>Operations</h2>
+          <ol id="operations"></ol>
+        </section>
+      </section>
+    </main>
+
+    <script src="/visualize.js"></script>
+  </body>
+</html>
