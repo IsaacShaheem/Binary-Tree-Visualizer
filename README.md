@@ -29,14 +29,6 @@ Frontend SVG visualizer
 
 This architecture keeps each layer focused. C owns the tree algorithms and memory management. Python uses `ctypes` to call the compiled shared library directly, avoiding subprocess overhead and file-based communication. Flask handles request routing and JSON responses while the frontend focuses on rendering, animation and interaction.
 
-## Screenshots / Demo
-
-![Demo Screenshot](images/demo.png)
-
-Demo GIF or video:
-
-![Demo GIF](images/demo.gif)
-
 ## How AVL Trees Work
 
 A regular BST can become unbalanced if values are inserted in sorted order. In the worst case it starts behaving like a linked list, which makes search, insert and delete slower.
